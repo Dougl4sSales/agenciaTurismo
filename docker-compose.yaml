@@ -1,0 +1,51 @@
+version: "3"
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./app:/app
+    environment:
+      - FLASK_RUN_HOST=0.0.0.0
+      - FLASK_DEBUG=true
+    depends_on:
+      - db
+
+  db:
+    image: mongo:latest
+    hostname: "agencia-mongo"
+    environment:
+      - "MONGO_INITDB_ROOT_DATABASE=agencia-turismo"
+      - "MONGO_INITDB_ROOT_USERNAME=mongo"
+      - "MONGO_INITDB_ROOT_PASSWORD=mongo"
+    volumes:
+      - ./init-db.js:/docker-entrypoint-initdb.d/init-db.js:ro
+    ports:
+      - "27018:27017"
+
+  frontend:
+    build:
+      context: ./frontend/my-material-app
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/my-material-app:/app
+      - /app/node_modules
+    depends_on:
+      - web
+
+  mongo-express:
+    image: mongo-express
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=db
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=mongo
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=mongo
+      - ME_CONFIG_MONGODB_AUTH_DATABASE=admin
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
