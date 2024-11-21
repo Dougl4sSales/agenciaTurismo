@@ -95,10 +95,15 @@ const Detalhes = ({ pacote, onAdd, goBack, isLogged }) => {
                 <img
                   src={
                     pontoInteresseImagem
-                      ? `data:image/png;base64, ${cidadeImagem}`
+                      ? `data:image/png;base64,${cidadeImagem}`
                       : "https://demofree.sirv.com/nope-not-here.jpg"
                   }
                   alt="Imagem da cidade"
+                  onError={(e) => {
+                    console.error('Erro ao carregar a imagem:', e);
+                    e.target.src = "https://demofree.sirv.com/nope-not-here.jpg";
+                  }}
+                  style={{ width: '215px', height: '200px', objectFit: 'cover' }}
                 />
 
                 <CardContent className={classes.cardContent}>
@@ -116,10 +121,15 @@ const Detalhes = ({ pacote, onAdd, goBack, isLogged }) => {
                 <img
                   src={
                     pontoInteresseImagem
-                      ? `data:image/png;base64, ${pontoInteresseImagem}`
+                      ? `data:image/png;base64,${pontoInteresseImagem}`
                       : "https://demofree.sirv.com/nope-not-here.jpg"
                   }
                   alt="Imagem do Ponto de Interesse"
+                  onError={(e) => {
+                    console.error('Erro ao carregar a imagem:', e);
+                    e.target.src = "https://demofree.sirv.com/nope-not-here.jpg";
+                  }}
+                  style={{ width: '215px', height: '200px', objectFit: 'cover' }}
                 />
 
                 <CardContent className={classes.cardContent}>
@@ -166,7 +176,7 @@ const Detalhes = ({ pacote, onAdd, goBack, isLogged }) => {
           © 2024
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary">
-          mais coisas
+          Sistema de check in de Viagens
         </Typography>
       </footer>
     </>

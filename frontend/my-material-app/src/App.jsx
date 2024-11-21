@@ -409,11 +409,15 @@ const App = () => {
                       <img
                         src={
                           pacote.cidade.imagem
-                            ? `data:image/png;base64, ${pacote.cidade.imagem}`
+                            ? `data:image/png;base64,${pacote.cidade.imagem}`
                             : "https://demofree.sirv.com/nope-not-here.jpg"
                         }
                         alt="Imagem da cidade"
-                        style={{ width: '215px', height: '200px',objectFit: 'cover'  }}
+                        onError={(e) => {
+                          console.error('Erro ao carregar a imagem:', e);
+                          e.target.src = "https://demofree.sirv.com/nope-not-here.jpg";
+                        }}
+                        style={{ width: '215px', height: '200px', objectFit: 'cover' }}
                       />
                     </Grid>
 
@@ -448,7 +452,7 @@ const App = () => {
           © 2024
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary">
-          mais coisas
+          Sistema de check in de Viagens
         </Typography>
       </footer>
     </>

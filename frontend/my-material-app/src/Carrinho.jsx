@@ -158,7 +158,7 @@ const Carrinho = ({ itens, onRemove, goBack, username }) => {
           © 2024
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary">
-          mais coisas
+         Sistema de check in de Viagens
         </Typography>
       </footer>
     </>

@@ -247,7 +247,7 @@ def get_visitas():
     for visita in visitas:
         cidade = db.cidades.find_one({'_id': visita['cidade']['_id']})
         cidade_info = {
-            'codigo': str(cidade['_id']),  # Renomeie '_id' para 'codigo'
+            'codigo': str(cidade['_id']),  
             'nome': cidade['nome'],
             'estado': cidade['estado'],
             'populacao': cidade['populacao'],
@@ -255,7 +255,7 @@ def get_visitas():
         }
 
         detalhes_visita = {
-            'codigo': str(visita['_id']),  # Renomeie '_id' para 'codigo'
+            'codigo': str(visita['_id']),  
             'nome': visita['nome'],
             'endereco': visita['endereco'],
             'hora_ini': str(visita['hora_ini']),
@@ -272,14 +272,15 @@ def get_visitas():
 
         for hotel in hoteis:
             detalhes_visita['hoteis'].append({
-                'codigo': str(hotel['_id']),  # Renomeie '_id' para 'codigo'
+                'codigo': str(hotel['_id']),  
                 'nome': hotel['nome'],
                 'imagem': base64.b64encode(hotel['imagem']).decode('utf-8') if 'imagem' in hotel else None
+                
             })
 
         for restaurante in restaurantes:
             detalhes_visita['restaurantes'].append({
-                'codigo': str(restaurante['_id']),  # Renomeie '_id' para 'codigo'
+                'codigo': str(restaurante['_id']),  
                 'nome': restaurante['nome'],
                 'preco_medio': restaurante['preco_medio'],
                 'especialidade': restaurante['especialidade'],
@@ -289,7 +290,7 @@ def get_visitas():
 
         for ponto_turistico in pontos_turisticos:
             detalhes_visita['pontos_turisticos'].append({
-                'codigo': str(ponto_turistico['_id']),  # Renomeie '_id' para 'codigo'
+                'codigo': str(ponto_turistico['_id']),  
                 'nome': ponto_turistico['nome'],
                 'descricao': ponto_turistico['descricao'],
                 'imagem': base64.b64encode(ponto_turistico['imagem']).decode('utf-8') if 'imagem' in ponto_turistico else None
